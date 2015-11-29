@@ -14,7 +14,10 @@ load.workout.data <- function(path.to.workout.xml) {
     stop(cat(path.to.workout.xml, "contains invalid formatted workout data. Exiting...\n"))
   }
   
-  XML::xmlToDataFrame(doc)
+  XML::xmlToDataFrame(doc,
+                      colClasses = c("character", "integer", "integer",
+                                     "integer", "numeric", "character"),
+                      stringsAsFactors = F)
 }
 
 #'

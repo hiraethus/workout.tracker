@@ -5,7 +5,7 @@
             <xs:choice minOccurs="0" maxOccurs="unbounded">
                 <xs:element name="workout">
                     <xs:complexType>
-                        <xs:sequence>
+                        <xs:sequence minOccurs="1" maxOccurs="1">
                             <xs:element name="date" type="xs:date" />
                             <xs:element name="level" type="xs:positiveInteger" />
                             <xs:element name="timeInMinutes" type="xs:positiveInteger" />
