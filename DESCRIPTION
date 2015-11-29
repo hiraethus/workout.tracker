@@ -1,0 +1,13 @@
+Package: workout.tracker
+Type: Package
+Title: A package to maintain exercise data in a strict XML format for a Reebok exercise bike
+Version: 0.01
+Date: 2015-11-29
+Author: Jones, Mike
+Maintainer: <meicaljohnjones@gmail.com>
+Description: A package to maintain exercise data in a strict XML format for a Reebok exercise bike
+License: GPL-3
+Imports:
+  XML
+Suggests:
+  
