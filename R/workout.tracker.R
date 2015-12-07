@@ -5,7 +5,8 @@
 #' 
 #' If invalid, the function exits prematurely
 load.workout.data <- function(path.to.workout.xml) {
-  schema <- XML::xmlParse("inst/workout_data.xsd", isSchema=T)
+  workout.data.xsd <- system.file("workout_data.xsd", package="workout.tracker")
+  schema <- XML::xmlParse(workout.data.xsd, isSchema=T)
   doc <- XML::xmlParse(path.to.workout.xml)
   validate <- XML::xmlSchemaValidate(schema, doc)
   isDocValid <- validate$status == 0
