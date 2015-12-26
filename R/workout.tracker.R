@@ -21,6 +21,16 @@ load.workout.data <- function(path.to.workout.xml) {
                       stringsAsFactors = F)
 }
 
+workouts.per.week <- function(workout.data) {
+  workout.dates <- as.Date(workout.data$date)
+
+  # floor dates to nearest sunday
+  days.after.sunday <- as.POSIXlt(workout.dates)$wday
+  workout.weeks <- workout.dates - days.after.sunday
+  
+  count(workout.weeks)
+}
+
 #'
 #' Saves a workout tracker data frame that is valid to a file as a valid workout tracker xml file
 #' *Not yet implemented*

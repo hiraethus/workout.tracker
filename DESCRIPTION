@@ -8,6 +8,7 @@ Maintainer: <meicaljohnjones@gmail.com>
 Description: A package to maintain exercise data in a strict XML format for a Reebok exercise bike
 License: GPL-3
 Imports:
-  XML
+  XML,
+  plyr
 Suggests:
   
