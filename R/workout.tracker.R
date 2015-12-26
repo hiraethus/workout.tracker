@@ -31,6 +31,10 @@ workouts.per.week <- function(workout.data) {
   count(workout.weeks)
 }
 
+calculate.average.velocity <- function(workout.data) {
+  workout.data$distanceCoveredKm / workout.data$time
+}
+
 #'
 #' Saves a workout tracker data frame that is valid to a file as a valid workout tracker xml file
 #' *Not yet implemented*
