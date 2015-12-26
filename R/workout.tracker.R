@@ -1,3 +1,23 @@
+generate.workout.tracker.report <- function(path.to.workout.xml) {
+  workout.data.frame <- load.workout.data(path.to.workout.xml)
+  
+  # append average speed for each session
+  workout.data.frame <- cbind(workout.data.frame,average.velocity=calculate.average.velocity(workout.data.frame))
+  
+  result <- list(
+    data = workout.data.frame,
+    workouts.per.week = list(
+      data=workouts.per.week(workout.data.frame),
+      graph=ggplot(data=wo.data, aes(x = wo.data$date, y = calculate.average.velocity(wo.data)))
+        + geom_point() + geom_smooth(method="loess", aes(group=1))
+    )
+  )
+  class(result) <- append(class(result), "WorkoutResult")
+  
+  return(result)
+}
+
+
 #'
 #' Takes a workout tracker xml file  and returns a Data frame of the data 
 #' if it is valid (see /inst/workout_tracker.xsd in order 
