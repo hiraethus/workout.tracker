@@ -6,11 +6,7 @@ generate.workout.tracker.report <- function(path.to.workout.xml) {
   
   result <- list(
     data = workout.data.frame,
-    workouts.per.week = list(
-      data=workouts.per.week(workout.data.frame),
-      graph=ggplot(data=wo.data, aes(x = wo.data$date, y = calculate.average.velocity(wo.data)))
-        + geom_point() + geom_smooth(method="loess", aes(group=1))
-    )
+    workouts.per.week = workouts.per.week(workout.data.frame)
   )
   class(result) <- append(class(result), "WorkoutResult")
   
