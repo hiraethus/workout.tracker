@@ -6,7 +6,7 @@ generate.workout.tracker.report <- function(path.to.workout.xml) {
   
   result <- list(
     data = workout.data.frame,
-    workouts.per.week = workouts.per.week(workout.data.frame)
+    week.workouts = workouts.per.week(workout.data.frame)
   )
   class(result) <- append(class(result), "WorkoutResult")
   
@@ -44,7 +44,7 @@ workouts.per.week <- function(workout.data) {
   days.after.sunday <- as.POSIXlt(workout.dates)$wday
   workout.weeks <- workout.dates - days.after.sunday
   
-  count(workout.weeks)
+  plyr::count(workout.weeks)
 }
 
 calculate.average.velocity <- function(workout.data) {
