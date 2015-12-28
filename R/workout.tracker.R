@@ -38,13 +38,23 @@ load.workout.data <- function(path.to.workout.xml) {
 }
 
 workouts.per.week <- function(workout.data) {
-  workout.dates <- as.Date(workout.data$date)
-
-  # floor dates to nearest sunday
+  workout.dates <- trunc(as.Date(workout.data$date), "day")
+  
+  earliest.date <- min(workout.dates)
+  sunday.of.earliest <- earliest.date - as.POSIXlt(earliest.date)$wday
+  
+  sundays.since.earliest <- seq(from=sunday.of.earliest, to=Sys.Date(), by=7)
+  talley.df <- data.frame(date=sundays.since.earliest, talley=rep(0, length(sundays.since.earliest)))
+  
   days.after.sunday <- as.POSIXlt(workout.dates)$wday
   workout.weeks <- workout.dates - days.after.sunday
   
-  plyr::count(workout.weeks)
+  for (workout.week in workout.weeks) {
+    index <- which(talley.df$date == workout.week)
+    talley.df[["talley"]][index] <- talley.df[["talley"]][index] + 1
+  }
+
+  return(talley.df)
 }
 
 calculate.average.velocity <- function(workout.data) {
