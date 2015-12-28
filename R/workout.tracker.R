@@ -31,14 +31,22 @@ load.workout.data <- function(path.to.workout.xml) {
     stop(cat(path.to.workout.xml, "contains invalid formatted workout data. Exiting...\n"))
   }
   
-  XML::xmlToDataFrame(doc,
-                      colClasses = list("character", "integer", "integer",
-                                     "integer", "numeric", "character", "numeric"),
-                      stringsAsFactors = F)
+  df <- XML::xmlToDataFrame(doc, stringsAsFactors = F)
+  df$date <- as.Date(df$date)
+  df$level <- as.integer(df$level)
+  df$timeInMinutes <- as.integer(df$timeInMinutes)
+  df$caloriesBurned <- as.integer(df$caloriesBurned)
+  df$distanceCoveredKm <- as.numeric(df$distanceCoveredKm)
+  df$recoveryScore <- as.factor(df$recoveryScore)
+  if ("waistSizeCm" %in% colnames(df)) {
+    df$waistSizeCm <- as.numeric(df$waistSizeCm)
+  }
+  
+  return(df)
 }
 
 workouts.per.week <- function(workout.data) {
-  workout.dates <- trunc(as.Date(workout.data$date), "day")
+  workout.dates <- trunc(workout.data$date, "day")
   
   earliest.date <- min(workout.dates)
   sunday.of.earliest <- earliest.date - as.POSIXlt(earliest.date)$wday
