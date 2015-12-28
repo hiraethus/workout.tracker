@@ -41,6 +41,9 @@ load.workout.data <- function(path.to.workout.xml) {
   if ("waistSizeCm" %in% colnames(df)) {
     df$waistSizeCm <- as.numeric(df$waistSizeCm)
   }
+  if ("weightKg" %in% colnames(df)) {
+    df$weightKg <- as.numeric(df$weightKg)
+  }
   
   return(df)
 }
