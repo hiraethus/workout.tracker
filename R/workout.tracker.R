@@ -32,8 +32,8 @@ load.workout.data <- function(path.to.workout.xml) {
   }
   
   XML::xmlToDataFrame(doc,
-                      colClasses = c("character", "integer", "integer",
-                                     "integer", "numeric", "character"),
+                      colClasses = list("character", "integer", "integer",
+                                     "integer", "numeric", "character", "numeric"),
                       stringsAsFactors = F)
 }
 
