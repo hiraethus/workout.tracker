@@ -31,7 +31,8 @@ load.workout.data <- function(path.to.workout.xml) {
     stop(cat(path.to.workout.xml, "contains invalid formatted workout data. Exiting...\n"))
   }
   
-  df <- XML::xmlToDataFrame(doc, stringsAsFactors = F)
+  workout.nodes <- getNodeSet(doc=doc, "//workouts/workout")
+  df <- XML::xmlToDataFrame(workout.nodes, stringsAsFactors = F)
   df$date <- as.Date(df$date)
   df$level <- as.integer(df$level)
   df$timeInMinutes <- as.integer(df$timeInMinutes)
