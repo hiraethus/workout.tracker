@@ -1,5 +1,8 @@
 generate.workout.tracker.report <- function(path.to.workout.xml) {
-  workout.data.frame <- load.workout.data(path.to.workout.xml)
+  doc <- XML::xmlParse(path.to.workout.xml)
+  if (!is.doc.valid(doc)) stop(cat(path.to.workout.xml, "contains invalid formatted workout data. Exiting...\n"))
+  
+  workout.data.frame <- load.workout.data(doc)
   
   # append average speed for each session
   workout.data.frame <- cbind(workout.data.frame,average.velocity=calculate.average.velocity(workout.data.frame))
@@ -13,6 +16,18 @@ generate.workout.tracker.report <- function(path.to.workout.xml) {
   return(result)
 }
 
+#'
+#' Function to ensure that the workout document `doc` conforms to the 
+#' xsd.
+#' 
+#' @return `True` if valid, `False` if invalid
+is.doc.valid <- function(doc) {
+  workout.data.xsd <- system.file("workout_data.xsd", package="workout.tracker")
+  schema <- XML::xmlParse(workout.data.xsd, isSchema=T)
+  validate <- XML::xmlSchemaValidate(schema, doc)
+  
+  validate$status == 0
+}
 
 #'
 #' Takes a workout tracker xml file  and returns a Data frame of the data 
@@ -20,17 +35,7 @@ generate.workout.tracker.report <- function(path.to.workout.xml) {
 #' to see how a valid xml file should be constructed).
 #' 
 #' If invalid, the function exits prematurely
-load.workout.data <- function(path.to.workout.xml) {
-  workout.data.xsd <- system.file("workout_data.xsd", package="workout.tracker")
-  schema <- XML::xmlParse(workout.data.xsd, isSchema=T)
-  doc <- XML::xmlParse(path.to.workout.xml)
-  validate <- XML::xmlSchemaValidate(schema, doc)
-  isDocValid <- validate$status == 0
-  
-  if (!isDocValid) {
-    stop(cat(path.to.workout.xml, "contains invalid formatted workout data. Exiting...\n"))
-  }
-  
+load.workout.data <- function(doc) {
   workout.nodes <- getNodeSet(doc=doc, "//workout-tracker/workouts/workout")
   df <- XML::xmlToDataFrame(workout.nodes, stringsAsFactors = F)
   df$date <- as.Date(df$date)
