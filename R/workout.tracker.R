@@ -38,7 +38,7 @@ is.doc.valid <- function(doc) {
 #' 
 #' If invalid, the function exits prematurely
 load.workout.data <- function(doc) {
-  workout.nodes <- getNodeSet(doc=doc, "//workout-tracker/workouts/workout")
+  workout.nodes <- XML::getNodeSet(doc=doc, "//workout-tracker/workouts/workout")
   df <- XML::xmlToDataFrame(workout.nodes, stringsAsFactors = F)
   df$date <- as.Date(df$date)
   df$level <- as.integer(df$level)
@@ -59,7 +59,7 @@ load.workout.data <- function(doc) {
 load.configuration <- function(doc) {
   configuration <- list()
   config.nodes <- XML::getNodeSet(doc=doc, path="//workout-tracker/configuration/*")
-  for (node in config.nodes) {configuration[[xmlName(node)]] <- xmlValue(node)}
+  for (node in config.nodes) {configuration[[XML::xmlName(node)]] <- XML::xmlValue(node)}
   
   configuration
 }
