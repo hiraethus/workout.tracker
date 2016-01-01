@@ -39,6 +39,6 @@ A typical workout xml document will be formed as follows:
 Once this xml document has been loaded, the data can be loaded in to  R using:
 
 ```R
-workout.tracker::generate.workout.tracker.report(path.to.workout.xml = "<path-to-xml-document>")
+workout.tracker::generate.report(path.to.workout.xml = "<path-to-xml-document>")
 ```
 The result contains a list containing a `data.frame` with all of the workout data as well as a second `data.frame` which shows the number of workouts per week for each week since the first workout in the xml document.
