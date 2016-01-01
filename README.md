@@ -1,4 +1,4 @@
-# workout.tracker
+# Workout Tracker
 
 A small R library to generate a report of data collated from exercising using a _Reebok ZR8_ exercise bike
 
@@ -42,3 +42,10 @@ Once this xml document has been loaded, the data can be loaded in to  R using:
 workout.tracker::generate.report(path.to.workout.xml = "<path-to-xml-document>")
 ```
 The result contains a list containing a `data.frame` with all of the workout data as well as a second `data.frame` which shows the number of workouts per week for each week since the first workout in the xml document.
+
+## Shiny Dashboard
+Also under development is a dashboard to give prerendered visualisations of data to the user for daily analysis. To run the shiny app:
+
+```R
+workout.tracker::run.server()
+```
