@@ -1,1 +1,1 @@
-exportPattern("generate.workout.tracker.report")
+exportPattern("generate.report")

@@ -1,4 +1,4 @@
-generate.workout.tracker.report <- function(path.to.workout.xml) {
+generate.report <- function(path.to.workout.xml) {
   doc <- XML::xmlParse(path.to.workout.xml)
   if (!is.doc.valid(doc)) stop(cat(path.to.workout.xml, "contains invalid formatted workout data. Exiting...\n"))
   
