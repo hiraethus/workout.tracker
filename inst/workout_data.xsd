@@ -2,7 +2,20 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="workout-tracker">
     <xs:complexType>
-      <xs:sequence>
+      <xs:all>
+        <xs:element name="configuration">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="heightCm">
+                <xs:simpleType>
+                  <xs:restriction base="xs:decimal">
+                  <xs:minInclusive value="0" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="workouts" minOccurs="0" maxOccurs="1">
           <xs:complexType>
               <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -46,7 +59,7 @@
               </xs:choice>
           </xs:complexType> 
       </xs:element>
-      </xs:sequence>
+      </xs:all>
     </xs:complexType>
   </xs:element>
 </xs:schema>
