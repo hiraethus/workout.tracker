@@ -17,18 +17,23 @@ A typical workout xml document will be formed as follows:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8"?>
-<workouts>
-  <workout>
-    <date>2013-12-30</date> <!-- takes a date in _big endian_ format -->
-    <level>1</level> <!-- takes positive integer value -->
-    <timeInMinutes>20</timeInMinutes> <!-- takes positive integer value -->
-    <caloriesBurned>340</caloriesBurned> <!-- takes positive integer value -->
-    <distanceCoveredKm>9.62</distanceCoveredKm> <!-- takes positive decimal value -->
-    <recoveryScore>F4</recoveryScore> <!-- takes the values F1 through F6 -->
-    <waistSizeCm>110.1</waistSizeCm> <!-- optional - takes positive decimal value -->
-    <weightKg>80</weightKg> <!-- optional - takes positive decimal value -->
-  </workout>
-</workouts>
+<workout-tracker>
+  <configuration>
+    <heightCm>160.1</heightCm> <!-- takes positive decimal value -->
+  </configuration>
+  <workouts>
+    <workout>
+      <date>2013-12-30</date> <!-- takes a date in _big endian_ format -->
+      <level>1</level> <!-- takes positive integer value -->
+      <timeInMinutes>20</timeInMinutes> <!-- takes positive integer value -->
+      <caloriesBurned>340</caloriesBurned> <!-- takes positive integer value -->
+      <distanceCoveredKm>9.62</distanceCoveredKm> <!-- takes positive decimal value -->
+      <recoveryScore>F4</recoveryScore> <!-- takes the values F1 through F6 -->
+      <waistSizeCm>110.1</waistSizeCm> <!-- optional - takes positive decimal value -->
+      <weightKg>80</weightKg> <!-- optional - takes positive decimal value -->
+    </workout>
+  </workouts>
+</workout-tracker>
 ```
 
 Once this xml document has been loaded, the data can be loaded in to  R using:
