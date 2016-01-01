@@ -1,1 +1,2 @@
 exportPattern("generate.report")
+exportPattern("run.server")
