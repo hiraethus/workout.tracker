@@ -3,9 +3,11 @@ generate.workout.tracker.report <- function(path.to.workout.xml) {
   if (!is.doc.valid(doc)) stop(cat(path.to.workout.xml, "contains invalid formatted workout data. Exiting...\n"))
   
   workout.data.frame <- load.workout.data(doc)
+  configuration <- load.configuration(doc)
   
   # append average speed for each session
   workout.data.frame <- cbind(workout.data.frame,average.velocity=calculate.average.velocity(workout.data.frame))
+  workout.data.frame <- cbind(workout.data.frame,bmi=calculate.bmi(workout.data.frame, configuration))
   
   result <- list(
     data = workout.data.frame,
@@ -54,6 +56,14 @@ load.workout.data <- function(doc) {
   return(df)
 }
 
+load.configuration <- function(doc) {
+  configuration <- list()
+  config.nodes <- XML::getNodeSet(doc=doc, path="//workout-tracker/configuration/*")
+  for (node in config.nodes) {configuration[[xmlName(node)]] <- xmlValue(node)}
+  
+  configuration
+}
+
 workouts.per.week <- function(workout.data) {
   workout.dates <- trunc(workout.data$date, "day")
   
@@ -76,6 +86,13 @@ workouts.per.week <- function(workout.data) {
 
 calculate.average.velocity <- function(workout.data) {
   workout.data$distanceCoveredKm / workout.data$time
+}
+
+calculate.bmi <- function(workout.data.frame, configuration) {
+  weightKg <- workout.data.frame$weightKg
+  heightM <- as.numeric(configuration$heightCm) / 100.
+  
+  weightKg / (heightM ^ 2)
 }
 
 #'
