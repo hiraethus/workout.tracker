@@ -18,6 +18,7 @@ shinyUI(fluidPage(
       p(textOutput("current.bmi")),
       h4('Num workouts:  '),
       p(textOutput("workouts.this.week")),
+      h3('Workout data'),
       tableOutput("workouts.table")
     )
   )
