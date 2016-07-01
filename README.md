@@ -54,3 +54,7 @@ Also under development is a dashboard to give prerendered visualisations of data
 ```R
 workout.tracker::run.server()
 ```
+
+## To do
+* Allow varying the time interval to show on the graphs
+* Allow adding/removing trend lines
