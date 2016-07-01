@@ -3,7 +3,12 @@
 A small R library to generate a report of data collated from exercising using a _Reebok ZR8_ exercise bike
 
 ## Installation
-You can install this library from github using `devtools`:
+If you are running Ubuntu, you'll need to install libxml2-dev
+```bash
+sudo apt-get install libxml2-dev
+```
+
+Then you can install this library from github using `devtools`:
 
 ```R
 # install.packages("devtools")
