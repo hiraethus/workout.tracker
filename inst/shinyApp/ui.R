@@ -6,18 +6,7 @@ shinyUI(fluidPage(
   titlePanel("Workout Tracker Dashboard"),
   
   sidebarLayout(
-    sidebarPanel(
-      fileInput("xml.document",
-                  "Workout data (xml)",
-                  multiple=F,
-    )),
-    
     mainPanel(
-      h3('This week stats'),
-      h4('BMI:  '),
-      p(textOutput("current.bmi")),
-      h4('Num workouts:  '),
-      p(textOutput("workouts.this.week")),
       h3('3 Month summary'),
       h4('Workout Frequency'),
       plotOutput("workout.frequency.plot"),
@@ -29,6 +18,17 @@ shinyUI(fluidPage(
       plotOutput('waist.size.plot'),
       h3('Workout data'),
       tableOutput("workouts.table")
-    )
+    ),
+    
+    sidebarPanel(
+      fileInput("xml.document",
+                "Workout data (xml)",
+                multiple=F,
+      ),
+      h3('This week stats'),
+      h4('BMI:  '),
+      p(textOutput("current.bmi")),
+      h4('Num workouts:  '),
+      p(textOutput("workouts.this.week")))
   )
 ))
