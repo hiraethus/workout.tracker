@@ -36,7 +36,9 @@ shinyServer(function(input, output) {
       data.table <- result()$data
       date.3.months.ago <- Sys.Date() - as.difftime(30 * 3, unit="days")
       data.last.3.months = subset(data.table, date > date.3.months.ago)
-      ggplot(data.last.3.months, aes(x = date, y = weightKg)) + geom_line()
+      ggplot(data.last.3.months, aes(x = date, y = weightKg)) + geom_line() + 
+        geom_smooth(method=lm,   # Add linear regression lines
+                    se=FALSE)    # Don't add shaded confidence region
     }
   })
   
@@ -45,7 +47,9 @@ shinyServer(function(input, output) {
       data.table <- result()$data
       date.3.months.ago <- Sys.Date() - as.difftime(30 * 3, unit="days")
       data.last.3.months = subset(data.table, date > date.3.months.ago)
-      ggplot(data.last.3.months, aes(x = date, y = distanceCoveredKm)) + geom_line()
+      ggplot(data.last.3.months, aes(x = date, y = distanceCoveredKm)) + geom_line() + 
+        geom_smooth(method=lm,   # Add linear regression lines
+                    se=FALSE)    # Don't add shaded confidence region
     }
   })
   
@@ -54,7 +58,9 @@ shinyServer(function(input, output) {
       data.table <- result()$data
       date.3.months.ago <- Sys.Date() - as.difftime(30 * 3, unit="days")
       data.last.3.months = subset(data.table, date > date.3.months.ago)
-      ggplot(data.last.3.months, aes(x = date, y = waistSizeCm)) + geom_line()
+      ggplot(data.last.3.months, aes(x = date, y = waistSizeCm)) + geom_line() + 
+        geom_smooth(method=lm,   # Add linear regression lines
+                    se=FALSE)    # Don't add shaded confidence region
     }
   })
 })
