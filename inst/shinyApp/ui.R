@@ -21,6 +21,12 @@ shinyUI(fluidPage(
       h3('3 Month summary'),
       h4('Workout Frequency'),
       plotOutput("workout.frequency.plot"),
+      h4('Distance Covered'),
+      plotOutput('distance.covered.plot'),
+      h4('Weight'),
+      plotOutput('weight.plot'),
+      h4('Waist size'),
+      plotOutput('waist.size.plot'),
       h3('Workout data'),
       tableOutput("workouts.table")
     )
